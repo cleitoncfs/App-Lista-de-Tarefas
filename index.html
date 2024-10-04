@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Tarefas</title>
+    <!-- Link para o CSS externo -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Link para o Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2" defer></script>
+    <!-- Link para o JS externo -->
+    <script src="app.js" defer></script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  </head>
+  <body>
+    <div id="tarefasApp">
+      <h1>Controle suas tarefas</h1>
+      <h2>Adicionar tarefa</h2>
+      <form @submit.prevent="addTarefa">
+        <input
+          type="text"
+          v-model="novaTarefa.titulo"
+          placeholder="Título da tarefa"
+        />
+        <input type="submit" value="Adicionar" />
+      </form>
+      <hr />
+      <h2>Tarefas a fazer</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pronta?</th>
+            <th>Título</th>
+            <th>Remover</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="tarefa in tarefas" :key="tarefa.titulo">
+            <td><input type="checkbox" v-model="tarefa.pronta" /></td>
+            <td>
+              <span v-bind:class="{ tarefaPronta: tarefa.pronta }"
+                >{{ tarefa.titulo }}</span
+              >
+            </td>
+            <td><button @click="removerTarefa(tarefa)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Rodapé da aplicação -->
+    <footer class="footer">
+      <p>© 2024 App Lista de Tarefas.</p>
+      <p>Desenvolvido por <span>Cleiton Santos</span></p>
+    </footer>
+  </body>
+</html>
